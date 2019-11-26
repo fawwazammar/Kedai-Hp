@@ -6,7 +6,6 @@
 package test;
 
 import java.sql.Connection;
-import java.sql.Statement;
 import java.sql.*;
 import javax.swing.JOptionPane;
 
@@ -118,7 +117,7 @@ public class LoginForm extends javax.swing.JFrame {
                 }
                 else if(loged == true){
                     JOptionPane.showMessageDialog(this, "Login Berhasil");
-                    new Pegawai().setVisible(true);
+                    new KedaiHp().setVisible(true);
                     this.dispose();
                 }else {
                     JOptionPane.showMessageDialog(this, "Login Gagal");

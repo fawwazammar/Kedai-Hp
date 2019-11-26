@@ -5,6 +5,17 @@
  */
 package test;
 
+import java.awt.HeadlessException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author acer
@@ -14,8 +25,70 @@ public class Admin extends javax.swing.JFrame {
     /**
      * Creates new form Admin
      */
+   
+    private Connection conn;
+    private Statement s;
+    
     public Admin() {
         initComponents();
+        setTitle("Hello Admin");
+        new Koneksi();
+        tabel();
+    }
+    
+    private void tabel(){
+        DefaultTableModel t = new DefaultTableModel();
+        t.addColumn("Username"); 
+        t.addColumn("Password"); 
+        t.addColumn("Status");
+        tData.setModel(t); 
+        
+        try{
+           Statement stat = (Statement) Koneksi.connect().createStatement();
+           String sql = "SELECT * FROM pegawai WHERE status = 'pegawai'";
+           ResultSet rs   = stat.executeQuery(sql);
+
+           //penelusuran baris pada tabel tblGaji dari database
+           while(rs.next ()){
+                Object[ ] obj = new Object[4];
+                obj[0] = rs.getString("id");
+                obj[1] = rs.getString("username");
+                obj[2] = rs.getString("password");
+                obj[3] = rs.getString("status");
+
+                t.addRow(obj);
+            }
+      }catch(SQLException err){
+            JOptionPane.showMessageDialog(null, err.getMessage() );
+      }
+        
+
+//        String query = "SELECT * FROM pegawai WHERE status = 'pegawai'";
+        
+//        try {
+//            PreparedStatement ps = this.conn.prepareStatement(query);
+//            ResultSet rs = ps.executeQuery(); 
+//            
+//            try {
+//                while (rs.next()) {
+//                    Object[ ] obj = new Object[3];
+//                    obj[1] = rs.getString("username");
+//                    obj[2] = rs.getString("password");
+//                    obj[3] = rs.getString("status");
+//
+//                    t.addRow(obj);
+////                    t.addRow(new Object[]{ 
+////                        rs.getString("username"),
+////                        rs.getString("password"), 
+////                        rs.getString("status")
+////                    }); 
+//                }
+//            } catch (SQLException ex) {
+//                Logger.getLogger(Admin.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//        }catch (Exception e) { 
+//            JOptionPane.showMessageDialog(rootPane, e); 
+//        } 
     }
 
     /**
@@ -44,7 +117,8 @@ public class Admin extends javax.swing.JFrame {
         cbStatus = new javax.swing.JComboBox<>();
         bProses = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tData = new javax.swing.JTable();
+        bLogout = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -173,12 +247,12 @@ public class Admin extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(cbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
                 .addComponent(bProses, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tData.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -190,7 +264,9 @@ public class Admin extends javax.swing.JFrame {
                 "Username", "Password", "Status"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tData);
+
+        bLogout.setText("Log Out");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -198,6 +274,8 @@ public class Admin extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(bLogout)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel2)
                 .addGap(19, 19, 19))
             .addGroup(layout.createSequentialGroup()
@@ -214,7 +292,9 @@ public class Admin extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel2)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(bLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -241,6 +321,20 @@ public class Admin extends javax.swing.JFrame {
 
     private void bTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bTambahActionPerformed
         // TODO add your handling code here:
+        try {
+            s.executeUpdate("insert into pegawai values (" 
+           + "' ',"
+           + "'" + tfUsername.getText()+"',"
+           + "'" + pfPassword.getText()+"',"
+           + "'pegawai')");
+           JOptionPane.showMessageDialog(null, "Berhasil Menambah Pegawai"); 
+           } catch (HeadlessException e) { 
+           JOptionPane.showMessageDialog(null, "Perintah Salah : "+e);
+           } catch (SQLException ex) {
+            Logger.getLogger(Admin.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+                tabel();
+           }
     }//GEN-LAST:event_bTambahActionPerformed
 
     /**
@@ -280,6 +374,7 @@ public class Admin extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bCari;
+    private javax.swing.JButton bLogout;
     private javax.swing.JButton bProses;
     private javax.swing.JButton bTambah;
     private javax.swing.JComboBox<String> cbStatus;
@@ -292,9 +387,9 @@ public class Admin extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JPasswordField pfPassword;
     private javax.swing.JPasswordField pfPasswordnd;
+    private javax.swing.JTable tData;
     private javax.swing.JTextField tfUsername;
     private javax.swing.JTextField tfUsernameStatus;
     // End of variables declaration//GEN-END:variables
