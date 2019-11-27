@@ -52,15 +52,15 @@ private DefaultTableModel TabModel;
     public Transaksi() {
         initComponents();
         setJam();
-//        SiapIsi(false);
-        TombolNormal();
-        SiapIsi(true);
-
-        notransaksi();
-        btadd.setEnabled(true);
-        btinventori.setEnabled(true);
-        btonoff.setEnabled(true);
-        btproses.setEnabled(true);
+        SiapIsi(false);
+//        TombolNormal();
+//        SiapIsi(true);
+//
+//        notransaksi();
+//        btadd.setEnabled(true);
+//        btinventori.setEnabled(true);
+//        btonoff.setEnabled(true);
+//        btproses.setEnabled(true);
 
         
         Object header[]={"KODE HP","MERK HP","TIPE","HARGA","JUMLAH","SUBTOTAL"};
@@ -903,26 +903,26 @@ private DefaultTableModel TabModel;
 
     private void btonoffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btonoffActionPerformed
         // TODO add your handling code here:
-//        if(btonoff.getText().equalsIgnoreCase("ON")){
-//            btonoff.setText("REFRESH");
-//            beresih();
-//            SiapIsi(true);
-//          
-//            notransaksi();
-//            btadd.setEnabled(true);
-//            btinventori.setEnabled(true);
-//            btonoff.setEnabled(true);
-//            btproses.setEnabled(true);
-//            
-//        } else{
-//            btonoff.setText("ON");
-//            beresih();
-//            SiapIsi(false);
-//            TombolNormal();
-//            tabelinventory();
-//            TabModel.getDataVector().removeAllElements();
-//            TabModel.fireTableDataChanged();
-//        }
+        if(btonoff.getText().equalsIgnoreCase("ON")){
+            btonoff.setText("REFRESH");
+            beresih();
+            SiapIsi(true);
+          
+            notransaksi();
+            btadd.setEnabled(true);
+            btinventori.setEnabled(true);
+            btonoff.setEnabled(true);
+            btproses.setEnabled(true);
+            
+        } else{
+            btonoff.setText("ON");
+            beresih();
+            SiapIsi(false);
+            TombolNormal();
+            tabelinventory();
+            TabModel.getDataVector().removeAllElements();
+            TabModel.fireTableDataChanged();
+        }
     }//GEN-LAST:event_btonoffActionPerformed
 
     private void btaddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btaddActionPerformed

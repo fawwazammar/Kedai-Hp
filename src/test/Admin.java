@@ -328,7 +328,7 @@ public class Admin extends javax.swing.JFrame {
             while (rs.next()) {
                 tfUsername.setText(rs.getString("username"));
 //                pfPassword.setText(rs.getString("password"));
-//                cbStatus.sexText(rs.getString("status"));
+                cbStatus.setSelectedItem(rs.getString("status"));
 
             }
         } catch (Exception e) {
