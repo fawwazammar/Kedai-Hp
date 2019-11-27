@@ -28,7 +28,7 @@ public class EditHarga extends javax.swing.JFrame {
     private void koneksi(){
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            con=(Connection) DriverManager.getConnection("jdbc:mysql://127.0.0.1/kedaihp", "root", "");
+            con=(Connection) DriverManager.getConnection("jdbc:mysql://127.0.0.1/kedai_hp", "root", "");
             stat=(Statement) con.createStatement();
         } catch (ClassNotFoundException | SQLException e) {
             JOptionPane.showMessageDialog(null, e);

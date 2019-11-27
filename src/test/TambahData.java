@@ -33,7 +33,7 @@ public class TambahData extends javax.swing.JFrame {
     private void koneksi(){
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            con=(Connection) DriverManager.getConnection("jdbc:mysql://127.0.0.1/kedaihp", "root", "");
+            con=(Connection) DriverManager.getConnection("jdbc:mysql://127.0.0.1/kedai_hp", "root", "");
             stat=(Statement) con.createStatement();
         } catch (ClassNotFoundException | SQLException e) {
             JOptionPane.showMessageDialog(null, e);
@@ -302,7 +302,7 @@ public class TambahData extends javax.swing.JFrame {
                     .addComponent(jLabel9)
                     .addComponent(tgl_data, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tambah_hp)
                     .addComponent(clear_hp)
@@ -320,7 +320,7 @@ public class TambahData extends javax.swing.JFrame {
                 {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Kode HP", "Nama HP", "Merk", "Warna", "Tahun", "Harga", "Tanggal"
+                "Kode HP", "Nama HP", "Merk", "Tipe", "Tahun", "Harga", "Tanggal"
             }
         ));
         jScrollPane1.setViewportView(tabel);
@@ -337,7 +337,7 @@ public class TambahData extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 555, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 829, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -357,49 +357,73 @@ public class TambahData extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void kembaliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kembaliActionPerformed
+        // TODO add your handling code here:
+        new KedaiHp().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_kembaliActionPerformed
+
+    private void clear_hpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clear_hpActionPerformed
+        // TODO add your handling code here:
+        kosongkan();
+    }//GEN-LAST:event_clear_hpActionPerformed
+
     private void tambah_hpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tambah_hpActionPerformed
         // TODO add your handling code here:
         try {
-            stat.executeUpdate("insert into handphone values (" 
-           + "'" + kode_hp.getText()+"',"
-           + "'" + merk_hp.getText()+"',"
-           + "'" + tipe.getText()+"'," 
-           + "'" + jumlah.getText()+"'," 
-           + "'" + tahun.getText()+ "'," 
-           + "'" + harga.getText()+ "',"
-           + "'" + tgl_data.getText()+ "')");
-           kosongkan(); 
-           JOptionPane.showMessageDialog(null, "Berhasil Menyimpan Data"); 
-           } catch (SQLException | HeadlessException e) { 
-           JOptionPane.showMessageDialog(null, "Perintah Salah : "+e);
-           }finally{
-                tabel();
-           }
+            stat.executeUpdate("insert into handphone values ("
+                + "'" + kode_hp.getText()+"',"
+                + "'" + merk_hp.getText()+"',"
+                + "'" + tipe.getText()+"',"
+                + "'" + jumlah.getText()+"',"
+                + "'" + tahun.getText()+ "',"
+                + "'" + harga.getText()+ "',"
+                + "'" + tgl_data.getText()+ "')");
+            kosongkan();
+            JOptionPane.showMessageDialog(null, "Berhasil Menyimpan Data");
+        } catch (SQLException | HeadlessException e) {
+            JOptionPane.showMessageDialog(null, "Perintah Salah : "+e);
+        }finally{
+            tabel();
+        }
     }//GEN-LAST:event_tambah_hpActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        tgl_data.setText(tgl.getText());
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void tipeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tipeActionPerformed
+
+    private void merk_hpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_merk_hpActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_merk_hpActionPerformed
 
     private void cari_kodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cari_kodeActionPerformed
         // TODO add your handling code here:
-        try { 
+        try {
             res=stat.executeQuery("select * from handphone where "+ "kode_hp='" +kode_hp.getText()+"'" );
             while (res.next()) {
-                kode_hp.setText(res.getString("kode_hp")); 
+                kode_hp.setText(res.getString("kode_hp"));
                 merk_hp.setText(res.getString("merk_hp"));
                 tipe.setText(res.getString("tipe"));
                 jumlah.setText(res.getString("jumlah"));
@@ -407,36 +431,11 @@ public class TambahData extends javax.swing.JFrame {
                 harga.setText(res.getString("harga"));
                 tgl_data.setText(res.getString("tgl_data"));
 
-            }                                        
-        } catch (Exception e) { 
-        JOptionPane.showMessageDialog(rootPane, e); 
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane, e);
         }
     }//GEN-LAST:event_cari_kodeActionPerformed
-
-    private void merk_hpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_merk_hpActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_merk_hpActionPerformed
-
-    private void tipeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tipeActionPerformed
-
-    private void clear_hpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clear_hpActionPerformed
-        // TODO add your handling code here:
-        kosongkan();
-    }//GEN-LAST:event_clear_hpActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        tgl_data.setText(tgl.getText());
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void kembaliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kembaliActionPerformed
-        // TODO add your handling code here:
-            new KedaiHp().setVisible(true);
-            dispose();
-
-    }//GEN-LAST:event_kembaliActionPerformed
 
     private void kode_hpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kode_hpActionPerformed
         // TODO add your handling code here:

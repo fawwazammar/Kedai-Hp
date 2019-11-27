@@ -26,8 +26,8 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jPanel2" max="32767" attributes="0"/>
                   <Component id="jPanel1" max="32767" attributes="0"/>
+                  <Component id="jPanel2" alignment="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -37,10 +37,10 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jPanel1" max="32767" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -160,7 +160,7 @@
                       <Component id="tgl_data" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="18" max="32767" attributes="0"/>
+                  <EmptySpace pref="37" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="tambah_hp" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="clear_hp" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -307,7 +307,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jLabel8" max="32767" attributes="0"/>
-                      <Component id="jScrollPane1" pref="555" max="32767" attributes="0"/>
+                      <Component id="jScrollPane1" pref="829" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -340,7 +340,7 @@
                     <Column editable="true" title="Kode HP" type="java.lang.Object"/>
                     <Column editable="true" title="Nama HP" type="java.lang.Object"/>
                     <Column editable="true" title="Merk" type="java.lang.Object"/>
-                    <Column editable="true" title="Warna" type="java.lang.Object"/>
+                    <Column editable="true" title="Tipe" type="java.lang.Object"/>
                     <Column editable="true" title="Tahun" type="java.lang.Object"/>
                     <Column editable="true" title="Harga" type="java.lang.Object"/>
                     <Column editable="true" title="Tanggal" type="java.lang.Object"/>
