@@ -421,7 +421,7 @@ public class TambahData extends javax.swing.JFrame {
     private void cari_kodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cari_kodeActionPerformed
         // TODO add your handling code here:
         try {
-            res=stat.executeQuery("select * from handphone where "+ "kode_hp='" +kode_hp.getText()+"'" );
+            res=stat.executeQuery("select * from handphone where kode_hp='" +kode_hp.getText()+"'" );
             while (res.next()) {
                 kode_hp.setText(res.getString("kode_hp"));
                 merk_hp.setText(res.getString("merk_hp"));

@@ -27,7 +27,6 @@ public class Admin extends javax.swing.JFrame {
      */
    
     private Connection conn;
-    private Statement s;
     
     public Admin() {
         initComponents();
@@ -48,7 +47,7 @@ public class Admin extends javax.swing.JFrame {
            String sql = "SELECT * FROM pegawai WHERE status = 'pegawai'";
            ResultSet rs   = stat.executeQuery(sql);
 
-           //penelusuran baris pada tabel tblGaji dari database
+           //penelusuran baris pada tabel pegawai dari database
            while(rs.next ()){
                 Object[ ] obj = new Object[4];
                 obj[0] = rs.getString("id");
@@ -267,6 +266,11 @@ public class Admin extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tData);
 
         bLogout.setText("Log Out");
+        bLogout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bLogoutActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -317,25 +321,59 @@ public class Admin extends javax.swing.JFrame {
 
     private void bCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCariActionPerformed
         // TODO add your handling code here:
+        try {
+            Statement stat = (Statement) Koneksi.connect().createStatement();
+            String sql = "SELECT * from pegawai where username='" +tfUsername.getText()+"'";
+            ResultSet rs = stat.executeQuery(sql);
+            while (rs.next()) {
+                tfUsername.setText(rs.getString("username"));
+//                pfPassword.setText(rs.getString("password"));
+//                cbStatus.sexText(rs.getString("status"));
+
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane, e);
+        }
+
     }//GEN-LAST:event_bCariActionPerformed
 
     private void bTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bTambahActionPerformed
         // TODO add your handling code here:
         try {
-            s.executeUpdate("insert into pegawai values (" 
-           + "' ',"
-           + "'" + tfUsername.getText()+"',"
-           + "'" + pfPassword.getText()+"',"
-           + "'pegawai')");
-           JOptionPane.showMessageDialog(null, "Berhasil Menambah Pegawai"); 
-           } catch (HeadlessException e) { 
+                Statement stat = (Statement) Koneksi.connect().createStatement();
+                String sql = "INSERT INTO pegawai (username, password, status) values ('"+tfUsername.getText()+"','" +pfPassword.getText()+"','pegawai')";
+
+//                String sql = "SELECT * FROM pegawai WHERE status = 'pegawai'";
+                stat.executeUpdate(sql);
+
+//                Statement s = (Statement) Koneksi.connect().createStatement();
+
+//                s.executeUpdate("insert into pegawai values (" 
+//                + "' ',"
+//                + "'" + tfUsername.getText()+"',"
+//                + "'" + pfPassword.getText()+"',"
+//                + "'pegawai')");
+
+                tfUsername.setText(""); 
+                pfPassword.setText("");
+                
+                tabel();
+
+                JOptionPane.showMessageDialog(null, "Berhasil Menambah Pegawai"); 
+        } catch (HeadlessException e) { 
            JOptionPane.showMessageDialog(null, "Perintah Salah : "+e);
-           } catch (SQLException ex) {
+        } catch (SQLException ex) {
             Logger.getLogger(Admin.class.getName()).log(Level.SEVERE, null, ex);
         }finally{
                 tabel();
            }
     }//GEN-LAST:event_bTambahActionPerformed
+
+    private void bLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bLogoutActionPerformed
+        // TODO add your handling code here:
+        new LoginForm().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_bLogoutActionPerformed
 
     /**
      * @param args the command line arguments

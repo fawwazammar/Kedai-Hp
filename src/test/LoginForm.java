@@ -74,13 +74,13 @@ public class LoginForm extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Rockwell", 1, 36)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(153, 153, 153));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Sing Up");
+        jLabel2.setText("Sign In");
 
         jLabel3.setFont(new java.awt.Font("OCR A Extended", 0, 14)); // NOI18N
-        jLabel3.setText("Login Password");
+        jLabel3.setText("Password");
 
         jLabel4.setFont(new java.awt.Font("OCR A Extended", 0, 14)); // NOI18N
-        jLabel4.setText("Login Id");
+        jLabel4.setText("Username");
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/test/user (1).png"))); // NOI18N
 

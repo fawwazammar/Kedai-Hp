@@ -52,8 +52,16 @@ private DefaultTableModel TabModel;
     public Transaksi() {
         initComponents();
         setJam();
-        SiapIsi(false);
+//        SiapIsi(false);
         TombolNormal();
+        SiapIsi(true);
+
+        notransaksi();
+        btadd.setEnabled(true);
+        btinventori.setEnabled(true);
+        btonoff.setEnabled(true);
+        btproses.setEnabled(true);
+
         
         Object header[]={"KODE HP","MERK HP","TIPE","HARGA","JUMLAH","SUBTOTAL"};
         TabModel=new DefaultTableModel(null, header);
@@ -866,10 +874,11 @@ private DefaultTableModel TabModel;
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(labeljam, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txstok, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txstok, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel1)
+                        .addComponent(labeljam, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -894,26 +903,26 @@ private DefaultTableModel TabModel;
 
     private void btonoffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btonoffActionPerformed
         // TODO add your handling code here:
-        if(btonoff.getText().equalsIgnoreCase("ON")){
-            btonoff.setText("REFRESH");
-            beresih();
-            SiapIsi(true);
-          
-            notransaksi();
-            btadd.setEnabled(true);
-            btinventori.setEnabled(true);
-            btonoff.setEnabled(true);
-            btproses.setEnabled(true);
-            
-        } else{
-            btonoff.setText("ON");
-            beresih();
-            SiapIsi(false);
-            TombolNormal();
-            tabelinventory();
-            TabModel.getDataVector().removeAllElements();
-            TabModel.fireTableDataChanged();
-        }
+//        if(btonoff.getText().equalsIgnoreCase("ON")){
+//            btonoff.setText("REFRESH");
+//            beresih();
+//            SiapIsi(true);
+//          
+//            notransaksi();
+//            btadd.setEnabled(true);
+//            btinventori.setEnabled(true);
+//            btonoff.setEnabled(true);
+//            btproses.setEnabled(true);
+//            
+//        } else{
+//            btonoff.setText("ON");
+//            beresih();
+//            SiapIsi(false);
+//            TombolNormal();
+//            tabelinventory();
+//            TabModel.getDataVector().removeAllElements();
+//            TabModel.fireTableDataChanged();
+//        }
     }//GEN-LAST:event_btonoffActionPerformed
 
     private void btaddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btaddActionPerformed
