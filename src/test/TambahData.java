@@ -15,7 +15,10 @@ import com.mysql.jdbc.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -40,18 +43,18 @@ public class TambahData extends javax.swing.JFrame {
         }
     }
     
-    private void kosongkan() { 
-        kode_hp.setText(""); 
+    private void kosongkan() {
+        kode_hp.setText("");
         merk_hp.setText("");
         tipe.setText("");
         jumlah.setText("");
         tahun.setText("");
         harga.setText("");
-        kode_hp.requestFocus();
         tgl_data.setText("");
+        batasgaransi.setText("");
     } 
 
-        java.util.Date tglsekarang = new java.util.Date();
+    java.util.Date tglsekarang = new java.util.Date();
     private SimpleDateFormat smpdtfmt = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
     //diatas adalah pengaturan format penulisan, bisa diubah sesuai keinginan.
     private String tanggal = smpdtfmt.format(tglsekarang);
@@ -82,6 +85,7 @@ public class TambahData extends javax.swing.JFrame {
         t.addColumn("Tahun"); 
         t.addColumn("Harga");
         t.addColumn("Tanggal");
+        t.addColumn("Batas Garansi");
         tabel.setModel(t); 
         try { 
             res=stat.executeQuery("select * from handphone"); 
@@ -92,7 +96,8 @@ public class TambahData extends javax.swing.JFrame {
                     res.getString("jumlah"), 
                     res.getString("tahun"), 
                     res.getString("harga"),
-                    res.getString("tgl_data")
+                    res.getString("tgl_data"),
+                    res.getString("batasgaransi")
                     }); 
                 }
         }catch (Exception e) { 
@@ -111,9 +116,6 @@ public class TambahData extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        kode_hp = new javax.swing.JTextField();
-        cari_kode = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         merk_hp = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -132,6 +134,10 @@ public class TambahData extends javax.swing.JFrame {
         tambah_hp = new javax.swing.JButton();
         clear_hp = new javax.swing.JButton();
         kembali = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        batasgaransi = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        kode_hp = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabel = new javax.swing.JTable();
@@ -144,21 +150,6 @@ public class TambahData extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Kedai HP");
-
-        kode_hp.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                kode_hpActionPerformed(evt);
-            }
-        });
-
-        cari_kode.setText("Cari");
-        cari_kode.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cari_kodeActionPerformed(evt);
-            }
-        });
-
-        jLabel3.setText("Kode Handphone");
 
         jLabel4.setText("Merk Handphone");
 
@@ -193,6 +184,12 @@ public class TambahData extends javax.swing.JFrame {
 
         jLabel9.setText("Tanggal ");
 
+        tgl_data.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tgl_dataActionPerformed(evt);
+            }
+        });
+
         Jumlah.setText("Jumlah");
 
         tambah_hp.setText("Tambah");
@@ -216,6 +213,22 @@ public class TambahData extends javax.swing.JFrame {
             }
         });
 
+        jLabel5.setText("Batas Garansi");
+
+        batasgaransi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                batasgaransiActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setText("Kode Handphone");
+
+        kode_hp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                kode_hpActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -232,34 +245,37 @@ public class TambahData extends javax.swing.JFrame {
                                 .addComponent(tgl, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3)
                                     .addComponent(jLabel4)
                                     .addComponent(jLabel2)
                                     .addComponent(Jumlah)
                                     .addComponent(jLabel6)
                                     .addComponent(jLabel7)
-                                    .addComponent(jLabel9))
+                                    .addComponent(jLabel9)
+                                    .addComponent(jLabel5))
+                                .addGap(52, 52, 52)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addComponent(tgl_data, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(harga, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(tahun, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jumlah, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(merk_hp)
+                                            .addComponent(tipe)
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addComponent(tambah_hp, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(clear_hp, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(kembali, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(batasgaransi, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel3)
                                 .addGap(51, 51, 51)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(tgl_data, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(harga, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(tahun, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jumlah, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(merk_hp)
-                                    .addComponent(tipe)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                        .addComponent(kode_hp)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(cari_kode))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(tambah_hp, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(clear_hp, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(kembali, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(kode_hp, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -268,16 +284,15 @@ public class TambahData extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(12, 12, 12)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(tgl, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cari_kode)
-                    .addComponent(kode_hp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(kode_hp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(5, 5, 5)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(merk_hp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -302,7 +317,11 @@ public class TambahData extends javax.swing.JFrame {
                     .addComponent(jLabel9)
                     .addComponent(tgl_data, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(batasgaransi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tambah_hp)
                     .addComponent(clear_hp)
@@ -389,13 +408,14 @@ public class TambahData extends javax.swing.JFrame {
         // TODO add your handling code here:
         try {
             stat.executeUpdate("insert into handphone values ("
-                + "'" + kode_hp.getText()+"',"
+                + "'" + kode_hp.getText()+"',"                    
                 + "'" + merk_hp.getText()+"',"
                 + "'" + tipe.getText()+"',"
                 + "'" + jumlah.getText()+"',"
                 + "'" + tahun.getText()+ "',"
                 + "'" + harga.getText()+ "',"
-                + "'" + tgl_data.getText()+ "')");
+                + "'" + tgl_data.getText()+ "',"                    
+                + "'" + batasgaransi.getText()+ "')");
             kosongkan();
             JOptionPane.showMessageDialog(null, "Berhasil Menyimpan Data");
         } catch (SQLException | HeadlessException e) {
@@ -407,7 +427,20 @@ public class TambahData extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        Calendar cal3 = Calendar.getInstance();
+        Date tgl1;
+        try {
+            tgl1 = smpdtfmt.parse(tgl.getText());
+            cal3.setTime(tgl1);
+            cal3.add(Calendar.DAY_OF_YEAR, 365);
+            System.out.println(smpdtfmt.format(cal3.getTime()));
+        } catch (ParseException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        String tglg = smpdtfmt.format(cal3.getTime());
         tgl_data.setText(tgl.getText());
+        batasgaransi.setText(tglg);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void tipeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipeActionPerformed
@@ -418,24 +451,18 @@ public class TambahData extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_merk_hpActionPerformed
 
-    private void cari_kodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cari_kodeActionPerformed
+    private void batasgaransiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_batasgaransiActionPerformed
         // TODO add your handling code here:
-        try {
-            res=stat.executeQuery("select * from handphone where kode_hp='" +kode_hp.getText()+"'" );
-            while (res.next()) {
-                kode_hp.setText(res.getString("kode_hp"));
-                merk_hp.setText(res.getString("merk_hp"));
-                tipe.setText(res.getString("tipe"));
-                jumlah.setText(res.getString("jumlah"));
-                tahun.setText(res.getString("tahun"));
-                harga.setText(res.getString("harga"));
-                tgl_data.setText(res.getString("tgl_data"));
+        
+        
 
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(rootPane, e);
-        }
-    }//GEN-LAST:event_cari_kodeActionPerformed
+
+    }//GEN-LAST:event_batasgaransiActionPerformed
+
+    private void tgl_dataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tgl_dataActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_tgl_dataActionPerformed
 
     private void kode_hpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kode_hpActionPerformed
         // TODO add your handling code here:
@@ -478,7 +505,7 @@ public class TambahData extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Jumlah;
-    private javax.swing.JButton cari_kode;
+    private javax.swing.JTextField batasgaransi;
     private javax.swing.JButton clear_hp;
     private javax.swing.JTextField harga;
     private javax.swing.JButton jButton1;
@@ -487,6 +514,7 @@ public class TambahData extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
