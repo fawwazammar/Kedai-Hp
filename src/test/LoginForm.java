@@ -8,6 +8,7 @@ package test;
 import java.sql.Connection;
 import java.sql.*;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 
 /**
@@ -15,7 +16,10 @@ import javax.swing.JOptionPane;
  * @author acer
  */
 public class LoginForm extends javax.swing.JFrame {
+    
     private Connection conn;
+//    private ResultSet rs;
+   
     /**
      * Creates new form LoginForm
      */
@@ -129,8 +133,8 @@ public class LoginForm extends javax.swing.JFrame {
 
     private void bLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bLoginActionPerformed
         // TODO add your handling code here:
+//        String id = null;
         String user = tfUsername.getText();
-        
         String pass = String.valueOf(pfPassword.getPassword());
        
         if(tfUsername.getText().equals("") || pfPassword.getPassword().toString().equals("")){
@@ -140,17 +144,17 @@ public class LoginForm extends javax.swing.JFrame {
             try {
                 PreparedStatement ps = this.conn.prepareStatement(query);
                 ResultSet rs = ps.executeQuery();
-                boolean loged = false, status = false;
+                boolean loged = false, akses = false;
                 while(rs.next()){
                     if(rs.getString("username").equals(user) && rs.getString("password").equals(pass)){
                         loged = true;
-                        if(rs.getString("status").equals("admin")){
-                            status = true;
+                        if(rs.getString("akses").equals("admin")){
+                            akses = true;
                         }
                         break;
                     }
                 }
-                if(loged == true && status == true){
+                if(loged == true && akses == true){
                     JOptionPane.showMessageDialog(this, "Login Berhasil");
                     new Admin().setVisible(true);
                     this.dispose();
@@ -205,7 +209,7 @@ public class LoginForm extends javax.swing.JFrame {
         // TODO add your handling code here:
         pfPassword.requestFocus();
     }//GEN-LAST:event_tfUsernameActionPerformed
-
+    
     /**
      * @param args the command line arguments
      */
@@ -240,6 +244,8 @@ public class LoginForm extends javax.swing.JFrame {
             }
         });
     }
+
+  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bLogin;

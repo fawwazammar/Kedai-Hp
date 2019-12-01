@@ -7,12 +7,12 @@ package test;
 
 import java.awt.HeadlessException;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -27,16 +27,23 @@ public class Admin extends javax.swing.JFrame {
      */
    
     private Connection conn;
+    private ResultSet rs;
+    private Statement stat;
     
     public Admin() {
         initComponents();
+        setLocationRelativeTo(null);
         setTitle("Hello Admin");
         new Koneksi();
         tabel();
+        
     }
     
     private void tabel(){
+        int no = 1;
+
         DefaultTableModel t = new DefaultTableModel();
+        t.addColumn("No");
         t.addColumn("Username"); 
         t.addColumn("Password"); 
         t.addColumn("Status");
@@ -44,22 +51,23 @@ public class Admin extends javax.swing.JFrame {
         
         try{
            Statement stat = (Statement) Koneksi.connect().createStatement();
-           String sql = "SELECT * FROM pegawai WHERE status = 'pegawai'";
-           ResultSet rs   = stat.executeQuery(sql);
+           String sql = "SELECT * FROM pegawai WHERE akses = 'pegawai'";
+           rs   = stat.executeQuery(sql);
 
            //penelusuran baris pada tabel pegawai dari database
            while(rs.next ()){
                 Object[ ] obj = new Object[4];
-                obj[0] = rs.getString("id");
+                obj[0] = no;
                 obj[1] = rs.getString("username");
                 obj[2] = rs.getString("password");
                 obj[3] = rs.getString("status");
 
                 t.addRow(obj);
+                no++;
             }
-      }catch(SQLException err){
+        }catch(SQLException err){
             JOptionPane.showMessageDialog(null, err.getMessage() );
-      }
+        }
         
 
 //        String query = "SELECT * FROM pegawai WHERE status = 'pegawai'";
@@ -113,8 +121,8 @@ public class Admin extends javax.swing.JFrame {
         tfUsernameStatus = new javax.swing.JTextField();
         bCari = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
-        cbStatus = new javax.swing.JComboBox<>();
         bProses = new javax.swing.JButton();
+        lStatus = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tData = new javax.swing.JTable();
         bLogout = new javax.swing.JButton();
@@ -204,14 +212,23 @@ public class Admin extends javax.swing.JFrame {
 
         jLabel6.setText("Status");
 
-        cbStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Aktif", "Tidak Aktif" }));
-
         bProses.setText("Proses");
+        bProses.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bProsesActionPerformed(evt);
+            }
+        });
+
+        lStatus.setText("-");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(bProses)
+                .addContainerGap())
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -223,12 +240,8 @@ public class Admin extends javax.swing.JFrame {
                         .addComponent(tfUsernameStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(bCari))
-                    .addComponent(cbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lStatus))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(bProses)
-                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -239,30 +252,35 @@ public class Admin extends javax.swing.JFrame {
                         .addComponent(jLabel5)
                         .addComponent(tfUsernameStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(bCari, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addComponent(jLabel6))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(cbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
+                .addGap(26, 26, 26)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(lStatus))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(bProses, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
         tData.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Username", "Password", "Status"
+                "No", "Username", "Password", "Status"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(tData);
 
         bLogout.setText("Log Out");
@@ -276,20 +294,20 @@ public class Admin extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(bLogout)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel2)
-                .addGap(19, 19, 19))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(bLogout)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel2)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -297,9 +315,9 @@ public class Admin extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(bLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(bLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -323,28 +341,38 @@ public class Admin extends javax.swing.JFrame {
         // TODO add your handling code here:
         try {
             Statement stat = (Statement) Koneksi.connect().createStatement();
-            String sql = "SELECT * from pegawai where username='" +tfUsername.getText()+"'";
-            ResultSet rs = stat.executeQuery(sql);
-            while (rs.next()) {
-                tfUsername.setText(rs.getString("username"));
-//                pfPassword.setText(rs.getString("password"));
-                cbStatus.setSelectedItem(rs.getString("status"));
+            String sql = "SELECT * from pegawai where username='" +tfUsernameStatus.getText()+"'";
+            rs = stat.executeQuery(sql);
 
-            }
-        } catch (Exception e) {
+//            String status = "SELECT status from pegawai where username='" +tfUsernameStatus.getText()+"'`";
+            while(rs.next()){
+                String status = rs.getString("status");
+                tfUsernameStatus.setText(rs.getString("username"));
+                if(status.equals("Aktif")){
+                    lStatus.setText("Aktif");
+                    bProses.setText("Non Aktif");
+                }else{
+                    lStatus.setText("Tidak Aktif");
+                    bProses.setText("Aktif");
+                }
+            }            
+           
+        } catch (SQLException e) {
             JOptionPane.showMessageDialog(rootPane, e);
         }
-
     }//GEN-LAST:event_bCariActionPerformed
 
     private void bTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bTambahActionPerformed
         // TODO add your handling code here:
         try {
-                Statement stat = (Statement) Koneksi.connect().createStatement();
-                String sql = "INSERT INTO pegawai (username, password, status) values ('"+tfUsername.getText()+"','" +pfPassword.getText()+"','pegawai')";
-
+            String username = "SELECT username FROM pegawai";
+//            if(!tfUsername.getText().equalsIgnoreCase(username)){
+            Statement stat = (Statement) Koneksi.connect().createStatement();
+            String sql = "INSERT INTO pegawai (username, password, akses, status) values ('"+tfUsername.getText()+"','" +pfPassword.getText()+"','pegawai','Aktif')";
 //                String sql = "SELECT * FROM pegawai WHERE status = 'pegawai'";
-                stat.executeUpdate(sql);
+            stat.executeUpdate(sql);                
+//            } else {
+//            }
 
 //                Statement s = (Statement) Koneksi.connect().createStatement();
 
@@ -354,19 +382,21 @@ public class Admin extends javax.swing.JFrame {
 //                + "'" + pfPassword.getText()+"',"
 //                + "'pegawai')");
 
-                tfUsername.setText(""); 
-                pfPassword.setText("");
+            tfUsername.setText(""); 
+            pfPassword.setText("");
+            pfPasswordnd.setText("");
                 
-                tabel();
+            tabel();
 
-                JOptionPane.showMessageDialog(null, "Berhasil Menambah Pegawai"); 
+            JOptionPane.showMessageDialog(null, "Berhasil Menambah Pegawai"); 
         } catch (HeadlessException e) { 
            JOptionPane.showMessageDialog(null, "Perintah Salah : "+e);
         } catch (SQLException ex) {
-            Logger.getLogger(Admin.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "Masukkan username yang lain");
+//            Logger.getLogger(Admin.class.getName()).log(Level.SEVERE, null, ex);
         }finally{
-                tabel();
-           }
+            tabel();
+        }
     }//GEN-LAST:event_bTambahActionPerformed
 
     private void bLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bLogoutActionPerformed
@@ -374,6 +404,32 @@ public class Admin extends javax.swing.JFrame {
         new LoginForm().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_bLogoutActionPerformed
+
+    private void bProsesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bProsesActionPerformed
+        // TODO add your handling code here:
+        try{
+            Statement stat = (Statement) Koneksi.connect().createStatement();
+            String status = lStatus.getText();             
+
+            if(status.equals("Aktif")){
+                String sql = "UPDATE pegawai SET status = 'Tidak Aktif' where username = '"+tfUsernameStatus.getText()+"'";
+                stat.executeUpdate(sql);
+                JOptionPane.showConfirmDialog(rootPane, "Apakah yakin ingin menonaktifkan?");
+            }else if(status.equals("Tidak Aktif")){
+                String sql = "UPDATE pegawai SET status = 'Aktif' where username = '"+tfUsernameStatus.getText()+"'";
+                stat.executeUpdate(sql);
+                JOptionPane.showConfirmDialog(rootPane, "Apakah yakin ingin mengaktifkan kembali?");
+            }
+            
+            tfUsernameStatus.setText(""); 
+            lStatus.setText("-");
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Admin.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            tabel();
+        }
+    }//GEN-LAST:event_bProsesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -410,12 +466,15 @@ public class Admin extends javax.swing.JFrame {
         });
     }
 
+   
+    
+    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bCari;
     private javax.swing.JButton bLogout;
     private javax.swing.JButton bProses;
     private javax.swing.JButton bTambah;
-    private javax.swing.JComboBox<String> cbStatus;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -425,6 +484,7 @@ public class Admin extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lStatus;
     private javax.swing.JPasswordField pfPassword;
     private javax.swing.JPasswordField pfPasswordnd;
     private javax.swing.JTable tData;
