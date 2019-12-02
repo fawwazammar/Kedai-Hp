@@ -59,32 +59,30 @@ public class Garansi extends javax.swing.JFrame {
         initComponents();
         setTitle("Entry Data Hp");
         koneksi();
-        tabel();
+        tabelTransaksi();
         setLocationRelativeTo(null);
-
-        
     }
     
-    private void tabel(){
+    private void tabelTransaksi(){
         DefaultTableModel t= new DefaultTableModel();
+        t.addColumn("No Transaksi");
         t.addColumn("Kode Hp"); 
         t.addColumn("Merk Hp"); 
         t.addColumn("Tipe");
-        t.addColumn("Jumlah"); 
-        t.addColumn("Tahun"); 
+        t.addColumn("Jumlah");
         t.addColumn("Harga");
-        t.addColumn("Tanggal");
-        tabel.setModel(t); 
+        t.addColumn("Tanggal Transaksi");
+        tabelTransaksi.setModel(t); 
         try { 
-            res=stat.executeQuery("select * from handphone"); 
+            res=stat.executeQuery("select * from transaksi"); 
                 while (res.next()) { 
-                    t.addRow(new Object[]{ res.getString("kode_hp"),
-                    res.getString("merk_hp"), 
+                    t.addRow(new Object[]{ res.getString("notransaksi"),
+                    res.getString("kodeHp"),
+                    res.getString("merkHp"), 
                     res.getString("tipe"), 
                     res.getString("jumlah"), 
-                    res.getString("tahun"), 
                     res.getString("harga"),
-                    res.getString("tgl_data")
+                    res.getString("tglTransaksi")
                     }); 
                 }
         }catch (Exception e) { 
@@ -103,79 +101,24 @@ public class Garansi extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel3 = new javax.swing.JLabel();
-        kode_hp = new javax.swing.JTextField();
-        cari_kode = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tabel = new javax.swing.JTable();
-        jLabel8 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         merk_hp = new javax.swing.JTextField();
         tipe = new javax.swing.JTextField();
-        tanggal = new javax.swing.JTextField();
+        tglTransaksi = new javax.swing.JTextField();
         garansi = new javax.swing.JButton();
         kembali = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tabelTransaksi = new javax.swing.JTable();
+        jLabel5 = new javax.swing.JLabel();
+        noTransaksi = new javax.swing.JTextField();
+        cari_transaksi = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jLabel3.setText("Kode Handphone");
-
-        kode_hp.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                kode_hpActionPerformed(evt);
-            }
-        });
-
-        cari_kode.setText("Cari");
-        cari_kode.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cari_kodeActionPerformed(evt);
-            }
-        });
-
-        jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        tabel.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
-            },
-            new String [] {
-                "Kode HP", "Nama HP", "Merk", "Tipe", "Tahun", "Harga", "Tanggal"
-            }
-        ));
-        jScrollPane1.setViewportView(tabel);
-
-        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel8.setText("Data Handphone");
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 639, Short.MAX_VALUE)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel8)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
-                .addGap(23, 23, 23))
-        );
 
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
@@ -197,9 +140,9 @@ public class Garansi extends javax.swing.JFrame {
             }
         });
 
-        tanggal.addActionListener(new java.awt.event.ActionListener() {
+        tglTransaksi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tanggalActionPerformed(evt);
+                tglTransaksiActionPerformed(evt);
             }
         });
 
@@ -230,7 +173,7 @@ public class Garansi extends javax.swing.JFrame {
                 .addGap(45, 45, 45)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(tipe, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tanggal, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tglTransaksi, javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(garansi)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -252,13 +195,71 @@ public class Garansi extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(tanggal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tglTransaksi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(garansi)
                     .addComponent(kembali))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel9.setText("Data Transaksi Handphone");
+
+        tabelTransaksi.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(tabelTransaksi);
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(466, 466, 466))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jScrollPane2)
+                        .addContainerGap())))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel9)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jLabel5.setText("No Transaksi");
+
+        noTransaksi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                noTransaksiActionPerformed(evt);
+            }
+        });
+
+        cari_transaksi.setText("CARI");
+        cari_transaksi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cari_transaksiActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -267,58 +268,33 @@ public class Garansi extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(kode_hp, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(cari_kode))
-                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(jLabel5)
+                        .addGap(31, 31, 31)
+                        .addComponent(noTransaksi, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cari_transaksi)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(46, 46, 46)
+                .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(kode_hp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3)
-                    .addComponent(cari_kode))
-                .addGap(18, 18, 18)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jLabel5)
+                    .addComponent(noTransaksi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cari_transaksi))
+                .addGap(35, 35, 35)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(118, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void kode_hpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kode_hpActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_kode_hpActionPerformed
-
-    private void cari_kodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cari_kodeActionPerformed
-        // TODO add your handling code here:
-        try {
-            res=stat.executeQuery("select * from handphone where "+ "kode_hp='" +kode_hp.getText()+"'" );
-            while (res.next()) {
-                kode_hp.setText(res.getString("kode_hp"));
-                merk_hp.setText(res.getString("merk_hp"));
-                tipe.setText(res.getString("tipe"));
-                tanggal.setText(res.getString("tgl_data"));
-//                jumlah.setText(res.getString("jumlah"));
-//                tahun.setText(res.getString("tahun"));
-//                harga.setText(res.getString("harga"));
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(rootPane, e);
-        }
-    }//GEN-LAST:event_cari_kodeActionPerformed
 
     private void merk_hpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_merk_hpActionPerformed
         // TODO add your handling code here:
@@ -328,9 +304,9 @@ public class Garansi extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_tipeActionPerformed
 
-    private void tanggalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tanggalActionPerformed
+    private void tglTransaksiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tglTransaksiActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_tanggalActionPerformed
+    }//GEN-LAST:event_tglTransaksiActionPerformed
 
     private void garansiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_garansiActionPerformed
         // TODO add your handling code here:
@@ -340,7 +316,7 @@ public class Garansi extends javax.swing.JFrame {
         Date now;
         String batasGaransi;
         try {
-            tgl1 = smpdtfmt.parse(tanggal.getText());
+            tgl1 = smpdtfmt.parse(tglTransaksi.getText());
             now = smpdtfmt.parse(tanggalNow);
             cal3.setTime(tgl1);
             cal3.add(Calendar.DAY_OF_YEAR, 365);
@@ -365,8 +341,27 @@ public class Garansi extends javax.swing.JFrame {
     private void kembaliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kembaliActionPerformed
         // TODO add your handling code here:
         new KedaiHp().setVisible(true);
-        this.dispose();
+        dispose();
     }//GEN-LAST:event_kembaliActionPerformed
+
+    private void noTransaksiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_noTransaksiActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_noTransaksiActionPerformed
+
+    private void cari_transaksiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cari_transaksiActionPerformed
+        // TODO add your handling code here:
+        try {
+            res=stat.executeQuery("select * from transaksi where "+ "notransaksi='" +noTransaksi.getText()+"'" );
+            while (res.next()) {
+                noTransaksi.setText(res.getString("notransaksi"));
+                merk_hp.setText(res.getString("merkHp"));
+                tipe.setText(res.getString("tipe"));
+                tglTransaksi.setText(res.getString("tglTransaksi"));
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane, e);
+        }
+    }//GEN-LAST:event_cari_transaksiActionPerformed
 
     /**
      * @param args the command line arguments
@@ -404,21 +399,21 @@ public class Garansi extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton cari_kode;
+    private javax.swing.JButton cari_transaksi;
     private javax.swing.JButton garansi;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton kembali;
-    private javax.swing.JTextField kode_hp;
     private javax.swing.JTextField merk_hp;
-    private javax.swing.JTable tabel;
-    private javax.swing.JTextField tanggal;
+    private javax.swing.JTextField noTransaksi;
+    private javax.swing.JTable tabelTransaksi;
+    private javax.swing.JTextField tglTransaksi;
     private javax.swing.JTextField tipe;
     // End of variables declaration//GEN-END:variables
 }
