@@ -165,6 +165,7 @@ public class KedaiHp extends javax.swing.JFrame {
     private void bLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bLogoutActionPerformed
         // TODO add your handling code here:
         new LoginForm().setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_bLogoutActionPerformed
 
     /**

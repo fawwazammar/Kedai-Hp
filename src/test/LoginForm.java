@@ -18,6 +18,7 @@ import javax.swing.JTextField;
 public class LoginForm extends javax.swing.JFrame {
     
     private Connection conn;
+    String user;
 //    private ResultSet rs;
    
     /**
@@ -42,173 +43,125 @@ public class LoginForm extends javax.swing.JFrame {
         bLogin = new javax.swing.JButton();
         tfUsername = new javax.swing.JTextField();
         pfPassword = new javax.swing.JPasswordField();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(680, 566));
-        setSize(new java.awt.Dimension(680, 566));
+        setPreferredSize(new java.awt.Dimension(400, 500));
+        setSize(new java.awt.Dimension(400, 500));
+        getContentPane().setLayout(null);
 
         bLogin.setBackground(new java.awt.Color(255, 255, 255));
         bLogin.setFont(new java.awt.Font("OCR A Extended", 1, 18)); // NOI18N
-        bLogin.setText("Login");
+        bLogin.setForeground(new java.awt.Color(102, 255, 102));
+        bLogin.setBorderPainted(false);
+        bLogin.setContentAreaFilled(false);
+        bLogin.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bLoginMouseClicked(evt);
+            }
+        });
         bLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bLoginActionPerformed(evt);
             }
         });
+        getContentPane().add(bLogin);
+        bLogin.setBounds(240, 390, 100, 50);
 
-        tfUsername.setFont(new java.awt.Font("OCR A Extended", 0, 18)); // NOI18N
+        tfUsername.setFont(new java.awt.Font("Poppins Medium", 0, 18)); // NOI18N
         tfUsername.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        tfUsername.setBorder(null);
         tfUsername.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfUsernameActionPerformed(evt);
             }
         });
+        getContentPane().add(tfUsername);
+        tfUsername.setBounds(100, 220, 190, 30);
 
-        pfPassword.setFont(new java.awt.Font("OCR A Extended", 0, 18)); // NOI18N
+        pfPassword.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
+        pfPassword.setBorder(null);
         pfPassword.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 pfPasswordActionPerformed(evt);
             }
         });
+        getContentPane().add(pfPassword);
+        pfPassword.setBounds(100, 307, 190, 30);
 
-        jLabel2.setFont(new java.awt.Font("Rockwell", 1, 36)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Sign In");
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/test/gambar/LoginForm.jpg"))); // NOI18N
+        getContentPane().add(jLabel5);
+        jLabel5.setBounds(0, 0, 400, 500);
 
-        jLabel3.setFont(new java.awt.Font("OCR A Extended", 0, 14)); // NOI18N
-        jLabel3.setText("Password");
-
-        jLabel4.setFont(new java.awt.Font("OCR A Extended", 0, 14)); // NOI18N
-        jLabel4.setText("Username");
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/test/user (1).png"))); // NOI18N
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(62, 62, 62)
-                .addComponent(jLabel1)
-                .addGap(56, 56, 56)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(pfPassword, javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(tfUsername, javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(bLogin, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4))
-                .addContainerGap(57, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(80, 80, 80)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel4)
-                        .addGap(8, 8, 8)
-                        .addComponent(tfUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(pfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(bLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(96, Short.MAX_VALUE))
-        );
-
-        setSize(new java.awt.Dimension(526, 489));
+        setSize(new java.awt.Dimension(416, 539));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void bLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bLoginActionPerformed
         // TODO add your handling code here:
-//        String id = null;
-        String user = tfUsername.getText();
+        user = tfUsername.getText();
         String pass = String.valueOf(pfPassword.getPassword());
+
        
         if(tfUsername.getText().equals("") || pfPassword.getPassword().toString().equals("")){
-            JOptionPane.showMessageDialog(this, "Username Atau Password Tidak Boleh Kosong");
+            JOptionPane.showMessageDialog(this, "Username atau Password Tidak Boleh Kosong");
         }else {
             String query = "SELECT * FROM pegawai WHERE username = '"+user+"'";
             try {
                 PreparedStatement ps = this.conn.prepareStatement(query);
                 ResultSet rs = ps.executeQuery();
-                boolean loged = false, akses = false;
+                boolean loged = false, akses = false, status = false;
                 while(rs.next()){
-                    if(rs.getString("username").equals(user) && rs.getString("password").equals(pass)){
-                        loged = true;
+                    if(rs.getString("username").equals(user) && rs.getString("password").equals(pass) && rs.getString("status").equalsIgnoreCase("Aktif")){
+                        loged = true; status = true; 
                         if(rs.getString("akses").equals("admin")){
                             akses = true;
                         }
                         break;
+                    }else if(rs.getString("username").equals(user) && rs.getString("password").equals(pass)){
+                        loged = true; status = false;                         
                     }
                 }
-                if(loged == true && akses == true){
-                    JOptionPane.showMessageDialog(this, "Login Berhasil");
-                    new Admin().setVisible(true);
+                if(loged == true && akses == true && status == true){
+//                    JOptionPane.showMessageDialog(this, "Login Berhasil");
+                    new Admin(user).setVisible(true);
                     this.dispose();
-                }
-                else if(loged == true){
-                    JOptionPane.showMessageDialog(this, "Login Berhasil");
+                }else if(loged == true && status == false){
+                    JOptionPane.showMessageDialog(this, "Akun anda sedang di nonaktifkan.\n\n Harap menghubungi Admin");
+                }else if(loged == true){
+//                    JOptionPane.showMessageDialog(this, "Login Berhasil");
                     new KedaiHp().setVisible(true);
                     this.dispose();
-                }else {
+                }else if(loged ==false){
                     JOptionPane.showMessageDialog(this, "Login Gagal");
+                    tfUsername.setText("");
+                    pfPassword.setText("");
                 }
                 rs.close();
                 ps.close();
+                
 
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(this, "Terdapat Masalah Ke Database"+ex.toString());
             }
-            
-//        try{
-//            Connection c = Koneksi.connect();
-//            Statement s = c.createStatement();
-//            String sql = "SELECT username, password FROM pegawai where username='"+tfUsername.getText() + "' and password='"+ pfPassword.getText() +"'";
-//            ResultSet rs = s.executeQuery(sql);
-//            String status = "SELECT status FROM pegawai where username='"+tfUsername.getText() + "' and password='"+ pfPassword.getText() +"'";
-//                
-//            int baris = 0;
-//            while (rs.next()) {
-//                baris = rs.getRow();
-//            }
-//            
-//            
-//            if (baris ==1) {
-//                JOptionPane.showMessageDialog(null,"Berhasil Login");
-//                if("admin".equals(status)){
-//                    new Admin().setVisible(true);
-//                }
-//            }else {
-//                JOptionPane.showMessageDialog(null,"Gagal Login");
-//            }
-//        }catch(SQLException e){
-//           
-//        }
+      
         }
     }//GEN-LAST:event_bLoginActionPerformed
+
+    private void tfUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfUsernameActionPerformed
+        // TODO add your handling code here:
+        pfPassword.requestFocus();
+    }//GEN-LAST:event_tfUsernameActionPerformed
 
     private void pfPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pfPasswordActionPerformed
         // TODO add your handling code here:
         bLogin.requestFocus();        
     }//GEN-LAST:event_pfPasswordActionPerformed
 
-    private void tfUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfUsernameActionPerformed
+    private void bLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bLoginMouseClicked
         // TODO add your handling code here:
-        pfPassword.requestFocus();
-    }//GEN-LAST:event_tfUsernameActionPerformed
+        new Admin(user);
+    }//GEN-LAST:event_bLoginMouseClicked
     
     /**
      * @param args the command line arguments
@@ -249,10 +202,7 @@ public class LoginForm extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bLogin;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPasswordField pfPassword;
     private javax.swing.JTextField tfUsername;
     // End of variables declaration//GEN-END:variables

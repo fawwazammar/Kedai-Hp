@@ -29,7 +29,6 @@ public class TransaksiKedai extends javax.swing.JFrame {
     private Connection con;
     private Statement stat;
     private ResultSet res;
-    private Coba coba;
     private void koneksi(){
         try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -672,7 +671,8 @@ public class TransaksiKedai extends javax.swing.JFrame {
             ambildata();
             perbaruistok();
             
-         
+            ambildata();
+            
 
     }//GEN-LAST:event_bttransaksiActionPerformed
 

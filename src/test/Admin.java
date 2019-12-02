@@ -14,6 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -30,13 +31,21 @@ public class Admin extends javax.swing.JFrame {
     private ResultSet rs;
     private Statement stat;
     
-    public Admin() {
+    String zzz;
+
+//    public Admin(String zzz) {
+//        this.zzz = zzz;
+//    }
+    
+    
+
+    public Admin(String zzz) {
         initComponents();
         setLocationRelativeTo(null);
         setTitle("Hello Admin");
         new Koneksi();
         tabel();
-        
+        zzzz.setText(zzz);
     }
     
     private void tabel(){
@@ -107,7 +116,8 @@ public class Admin extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel2 = new javax.swing.JLabel();
+        zzzz = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -126,13 +136,24 @@ public class Admin extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tData = new javax.swing.JTable();
         bLogout = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setSize(new java.awt.Dimension(637, 539));
+        getContentPane().setLayout(null);
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel2.setText("Status : Admin");
+        zzzz.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        zzzz.setText("-");
+        getContentPane().add(zzzz);
+        zzzz.setBounds(510, 20, 117, 22);
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel9.setText("Status : ");
+        getContentPane().add(jLabel9);
+        jLabel9.setBounds(440, 20, 67, 22);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tambah Pegawai", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
+        jPanel1.setOpaque(false);
 
         jLabel1.setText("Username");
 
@@ -146,7 +167,7 @@ public class Admin extends javax.swing.JFrame {
 
         jLabel4.setText("Confirm Password");
 
-        bTambah.setText("Tambah");
+        bTambah.setContentAreaFilled(false);
         bTambah.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bTambahActionPerformed(evt);
@@ -159,19 +180,20 @@ public class Admin extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel4))
+                .addGap(28, 28, 28)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(bTambah)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel4))
-                        .addGap(28, 28, 28)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(tfUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(pfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(pfPasswordnd, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(tfUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pfPasswordnd, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(22, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(bTambah, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -188,12 +210,15 @@ public class Admin extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(pfPasswordnd, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
-                .addComponent(bTambah, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                .addComponent(bTambah, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
+        getContentPane().add(jPanel1);
+        jPanel1.setBounds(10, 80, 294, 252);
+
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Status Pegawai", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
+        jPanel2.setOpaque(false);
 
         jLabel5.setText("Username");
 
@@ -203,7 +228,7 @@ public class Admin extends javax.swing.JFrame {
             }
         });
 
-        bCari.setText("Cari");
+        bCari.setContentAreaFilled(false);
         bCari.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bCariActionPerformed(evt);
@@ -212,7 +237,10 @@ public class Admin extends javax.swing.JFrame {
 
         jLabel6.setText("Status");
 
+        bProses.setFont(new java.awt.Font("Poppins Medium", 0, 14)); // NOI18N
+        bProses.setForeground(new java.awt.Color(255, 255, 255));
         bProses.setText("Proses");
+        bProses.setContentAreaFilled(false);
         bProses.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bProsesActionPerformed(evt);
@@ -225,41 +253,43 @@ public class Admin extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(bProses)
-                .addContainerGap())
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel6))
-                .addGap(28, 28, 28)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(tfUsernameStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(bCari))
-                    .addComponent(lStatus))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel6))
+                        .addGap(28, 28, 28)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lStatus)
+                            .addComponent(tfUsernameStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(bCari, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(169, 169, 169)
+                        .addComponent(bProses, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(100, 100, 100))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel5)
                         .addComponent(tfUsernameStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(bCari, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(bCari, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(lStatus))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(bProses, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 102, Short.MAX_VALUE)
+                .addComponent(bProses, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
+
+        getContentPane().add(jPanel2);
+        jPanel2.setBounds(310, 80, 320, 252);
 
         tData.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -283,50 +313,23 @@ public class Admin extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tData);
 
-        bLogout.setText("Log Out");
+        getContentPane().add(jScrollPane1);
+        jScrollPane1.setBounds(10, 352, 617, 176);
+
+        bLogout.setContentAreaFilled(false);
         bLogout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bLogoutActionPerformed(evt);
             }
         });
+        getContentPane().add(bLogout);
+        bLogout.setBounds(348, 11, 70, 37);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(bLogout)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel2)))
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(bLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addGap(34, 34, 34)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/test/gambar/Admin.jpg"))); // NOI18N
+        getContentPane().add(jLabel7);
+        jLabel7.setBounds(0, 0, 637, 539);
 
-        pack();
+        setBounds(0, 0, 653, 578);
     }// </editor-fold>//GEN-END:initComponents
 
     private void tfUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfUsernameActionPerformed
@@ -341,24 +344,32 @@ public class Admin extends javax.swing.JFrame {
         // TODO add your handling code here:
         try {
             Statement stat = (Statement) Koneksi.connect().createStatement();
-            String sql = "SELECT * from pegawai where username='" +tfUsernameStatus.getText()+"'";
+            String sql = "SELECT username from pegawai where username='" +tfUsernameStatus.getText()+"'";
+            String akses = "SELECT akses from pegawai where username='" +tfUsernameStatus.getText()+"'";
             rs = stat.executeQuery(sql);
-
+//            boolean aksess = false;
+            if(tfUsernameStatus.getText().equals("")){
+                JOptionPane.showMessageDialog(this, "Harap mengisi username");
+            }else if(!tfUsernameStatus.getText().equals(sql)){
+                JOptionPane.showMessageDialog(this, "Username yang anda masukkan salah");                
+            }else if(tfUsernameStatus.getText().equals(sql) &&  akses.equals("pegawai")){
+                
 //            String status = "SELECT status from pegawai where username='" +tfUsernameStatus.getText()+"'`";
-            while(rs.next()){
-                String status = rs.getString("status");
-                tfUsernameStatus.setText(rs.getString("username"));
-                if(status.equals("Aktif")){
-                    lStatus.setText("Aktif");
-                    bProses.setText("Non Aktif");
-                }else{
-                    lStatus.setText("Tidak Aktif");
-                    bProses.setText("Aktif");
+                while(rs.next()){
+                    String status = rs.getString("status");
+                    tfUsernameStatus.setText(rs.getString("username"));
+                    if(status.equals("Aktif")){
+                        lStatus.setText("Aktif");
+                        bProses.setText("Non Aktif");
+                    }else{
+                        lStatus.setText("Tidak Aktif");
+                        bProses.setText("Aktif");
+                    }
                 }
             }            
            
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(rootPane, e);
+            JOptionPane.showMessageDialog(this, "SQL salah");
         }
     }//GEN-LAST:event_bCariActionPerformed
 
@@ -366,29 +377,22 @@ public class Admin extends javax.swing.JFrame {
         // TODO add your handling code here:
         try {
             String username = "SELECT username FROM pegawai";
-//            if(!tfUsername.getText().equalsIgnoreCase(username)){
             Statement stat = (Statement) Koneksi.connect().createStatement();
-            String sql = "INSERT INTO pegawai (username, password, akses, status) values ('"+tfUsername.getText()+"','" +pfPassword.getText()+"','pegawai','Aktif')";
-//                String sql = "SELECT * FROM pegawai WHERE status = 'pegawai'";
-            stat.executeUpdate(sql);                
-//            } else {
-//            }
+            
+            if(tfUsername.getText().equals("") || pfPassword.getPassword().equals("")){
+                JOptionPane.showMessageDialog(this, "Harap semua terisi");
+            }else{
+                String sql = "INSERT INTO pegawai (username, password, akses, status) values ('"+tfUsername.getText()+"','" +pfPassword.getText()+"','pegawai','Aktif')";
+                stat.executeUpdate(sql);                
 
-//                Statement s = (Statement) Koneksi.connect().createStatement();
+                tfUsername.setText(""); 
+                pfPassword.setText("");
+                pfPasswordnd.setText("");
 
-//                s.executeUpdate("insert into pegawai values (" 
-//                + "' ',"
-//                + "'" + tfUsername.getText()+"',"
-//                + "'" + pfPassword.getText()+"',"
-//                + "'pegawai')");
+                tabel();
+                JOptionPane.showMessageDialog(null, "Berhasil Menambah Pegawai"); 
 
-            tfUsername.setText(""); 
-            pfPassword.setText("");
-            pfPasswordnd.setText("");
-                
-            tabel();
-
-            JOptionPane.showMessageDialog(null, "Berhasil Menambah Pegawai"); 
+            }
         } catch (HeadlessException e) { 
            JOptionPane.showMessageDialog(null, "Perintah Salah : "+e);
         } catch (SQLException ex) {
@@ -423,6 +427,7 @@ public class Admin extends javax.swing.JFrame {
             
             tfUsernameStatus.setText(""); 
             lStatus.setText("-");
+            bProses.setText("Proses");
 
         } catch (SQLException ex) {
             Logger.getLogger(Admin.class.getName()).log(Level.SEVERE, null, ex);
@@ -461,7 +466,6 @@ public class Admin extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Admin().setVisible(true);
             }
         });
     }
@@ -476,11 +480,12 @@ public class Admin extends javax.swing.JFrame {
     private javax.swing.JButton bProses;
     private javax.swing.JButton bTambah;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
@@ -490,5 +495,6 @@ public class Admin extends javax.swing.JFrame {
     private javax.swing.JTable tData;
     private javax.swing.JTextField tfUsername;
     private javax.swing.JTextField tfUsernameStatus;
+    private javax.swing.JLabel zzzz;
     // End of variables declaration//GEN-END:variables
 }
