@@ -31,7 +31,7 @@ public class Admin extends javax.swing.JFrame {
     private ResultSet rs;
     private Statement stat;
     
-    String zzz;
+//    String zzz;
 
 //    public Admin(String zzz) {
 //        this.zzz = zzz;
@@ -344,32 +344,52 @@ public class Admin extends javax.swing.JFrame {
         // TODO add your handling code here:
         try {
             Statement stat = (Statement) Koneksi.connect().createStatement();
-            String sql = "SELECT username from pegawai where username='" +tfUsernameStatus.getText()+"'";
-            String akses = "SELECT akses from pegawai where username='" +tfUsernameStatus.getText()+"'";
+            String sql = "SELECT * from pegawai where username='" +tfUsernameStatus.getText()+"'";
+//            String akses = "SELECT akses from pegawai where username='" +tfUsernameStatus.getText()+"'";
             rs = stat.executeQuery(sql);
-//            boolean aksess = false;
+            String status = null , aa = null;
+
+            boolean aksess = false;
             if(tfUsernameStatus.getText().equals("")){
                 JOptionPane.showMessageDialog(this, "Harap mengisi username");
-            }else if(!tfUsernameStatus.getText().equals(sql)){
-                JOptionPane.showMessageDialog(this, "Username yang anda masukkan salah");                
-            }else if(tfUsernameStatus.getText().equals(sql) &&  akses.equals("pegawai")){
+            }
+            
+            while (rs.next()){
+                status = rs.getString("status");
+                tfUsernameStatus.setText(rs.getString("username"));
+
+                if(rs.getString("username").equals(tfUsernameStatus.getText())){
+                    aksess = true;
+                }else {
+                    aksess = false;
+                }
+            }
                 
 //            String status = "SELECT status from pegawai where username='" +tfUsernameStatus.getText()+"'`";
-                while(rs.next()){
-                    String status = rs.getString("status");
-                    tfUsernameStatus.setText(rs.getString("username"));
-                    if(status.equals("Aktif")){
-                        lStatus.setText("Aktif");
-                        bProses.setText("Non Aktif");
-                    }else{
-                        lStatus.setText("Tidak Aktif");
-                        bProses.setText("Aktif");
-                    }
+//            while(rs.next()){
+                
+            if(aksess == false || tfUsernameStatus.getText().equalsIgnoreCase("admin")){
+                JOptionPane.showMessageDialog(this, "Username yang anda masukkan salah");                
+
+            }else{
+//                while (rs.next()){
+//                    String status = rs.getString("status");
+//                    tfUsernameStatus.setText(rs.getString("username"));
+//                }
+                if(status.equals("Aktif")){
+                    lStatus.setText("Aktif");
+                    bProses.setText("Non Aktif");
+                }else{
+                    lStatus.setText("Tidak Aktif");
+                    bProses.setText("Aktif");
                 }
-            }            
+                
+            }
+//            }
+                      
            
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(this, "SQL salah");
+        } catch (SQLException ex) {
+            Logger.getLogger(Admin.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_bCariActionPerformed
 
@@ -417,12 +437,53 @@ public class Admin extends javax.swing.JFrame {
 
             if(status.equals("Aktif")){
                 String sql = "UPDATE pegawai SET status = 'Tidak Aktif' where username = '"+tfUsernameStatus.getText()+"'";
-                stat.executeUpdate(sql);
-                JOptionPane.showConfirmDialog(rootPane, "Apakah yakin ingin menonaktifkan?");
+//                int opsi = JOptionPane.showConfirmDialog(null, "Apakah yakin ingin menonaktifkan?");
+//                switch(opsi){
+//                    case JOptionPane.YES_OPTION:
+//                        stat.executeUpdate(sql);
+//                        JOptionPane.showMessageDialog(null, "Saat dipilih yes !");
+//                        break;
+//                    case JOptionPane.NO_OPTION:
+//                        JOptionPane.showMessageDialog(null, "Saat dipilih no !");
+//                        break;
+//                    default:
+//                        JOptionPane.showMessageDialog(null, "Saat dipilih cancel !");
+//                        break;
+//                }
+                int jawab = JOptionPane.showOptionDialog(this, 
+                        "Apakah yakin ingin menonaktifkan?", 
+                        null, 
+                        JOptionPane.YES_NO_OPTION, 
+                        JOptionPane.QUESTION_MESSAGE, null, null, null);
+        
+                if(jawab == JOptionPane.YES_OPTION){
+                    stat.executeUpdate(sql);
+                }
+
             }else if(status.equals("Tidak Aktif")){
                 String sql = "UPDATE pegawai SET status = 'Aktif' where username = '"+tfUsernameStatus.getText()+"'";
-                stat.executeUpdate(sql);
-                JOptionPane.showConfirmDialog(rootPane, "Apakah yakin ingin mengaktifkan kembali?");
+//                int opsi = JOptionPane.showConfirmDialog(null, "Apakah yakin ingin mengaktifkan kembali?");
+//                switch(opsi){
+//                    case JOptionPane.YES_OPTION:
+//                        stat.executeUpdate(sql);
+////                        JOptionPane.showMessageDialog(null, "Saat dipilih yes !");
+//                        break;
+//                    case JOptionPane.NO_OPTION:
+////                        JOptionPane.showMessageDialog(null, "Saat dipilih no !");
+//                        break;
+////                    default:
+////                        JOptionPane.showMessageDialog(null, "Saat dipilih cancel !");
+////                        break;
+//                }
+                int jawab = JOptionPane.showOptionDialog(this, 
+                        "Apakah yakin ingin mengaktifkan kembali?", 
+                        null, 
+                        JOptionPane.YES_NO_OPTION, 
+                        JOptionPane.QUESTION_MESSAGE, null, null, null);
+        
+                if(jawab == JOptionPane.YES_OPTION){
+                    stat.executeUpdate(sql);
+                }
             }
             
             tfUsernameStatus.setText(""); 

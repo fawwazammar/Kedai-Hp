@@ -128,9 +128,11 @@ public class LoginForm extends javax.swing.JFrame {
                     this.dispose();
                 }else if(loged == true && status == false){
                     JOptionPane.showMessageDialog(this, "Akun anda sedang di nonaktifkan.\n\n Harap menghubungi Admin");
+                    tfUsername.setText("");
+                    pfPassword.setText("");
                 }else if(loged == true){
 //                    JOptionPane.showMessageDialog(this, "Login Berhasil");
-                    new KedaiHp().setVisible(true);
+                    new KedaiHp(user).setVisible(true);
                     this.dispose();
                 }else if(loged ==false){
                     JOptionPane.showMessageDialog(this, "Login Gagal");
@@ -161,6 +163,7 @@ public class LoginForm extends javax.swing.JFrame {
     private void bLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bLoginMouseClicked
         // TODO add your handling code here:
         new Admin(user);
+        new KedaiHp(user);
     }//GEN-LAST:event_bLoginMouseClicked
     
     /**

@@ -5,6 +5,7 @@
  */
 package test;
 
+import java.sql.Connection;
 import javax.swing.JOptionPane;
 
 /**
@@ -15,10 +16,24 @@ public class KedaiHp extends javax.swing.JFrame {
 
     /**
      * Creates new form kedaiHp
+     * 
+     * @param zzz
      */
+    
+    private Connection conn;
+
+    
+    public KedaiHp(String zzz){
+        initComponents();
+        setLocationRelativeTo(null);
+        zzzz.setText(zzz);
+        new Koneksi();
+    }
+    
     public KedaiHp() {
         initComponents();
         setLocationRelativeTo(null);
+
     }
 
     /**
@@ -37,6 +52,7 @@ public class KedaiHp extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         bLogout = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
+        zzzz = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -90,7 +106,10 @@ public class KedaiHp extends javax.swing.JFrame {
         });
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel3.setText("Status : Pegawai");
+        jLabel3.setText("Status : ");
+
+        zzzz.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        zzzz.setText("-");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -111,8 +130,10 @@ public class KedaiHp extends javax.swing.JFrame {
                         .addGap(337, 337, 337)
                         .addComponent(bLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel3)))
-                .addContainerGap(15, Short.MAX_VALUE))
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(zzzz)))
+                .addContainerGap(66, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -128,7 +149,8 @@ public class KedaiHp extends javax.swing.JFrame {
                         .addGap(32, 32, 32)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(bLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(zzzz, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(99, 99, 99)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
@@ -145,21 +167,26 @@ public class KedaiHp extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         new TambahData().setVisible(true);
+        this.dispose();
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        new EditHarga().setVisible(true); 
+        new EditHarga().setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         new TransaksiKedai().setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
         new Garansi().setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void bLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bLogoutActionPerformed
@@ -199,7 +226,6 @@ public class KedaiHp extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new KedaiHp().setVisible(true);
 //                new kedaiHp().setVisible(true);
             }
         });
@@ -213,5 +239,6 @@ public class KedaiHp extends javax.swing.JFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel zzzz;
     // End of variables declaration//GEN-END:variables
 }
