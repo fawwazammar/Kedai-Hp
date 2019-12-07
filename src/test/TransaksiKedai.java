@@ -60,9 +60,7 @@ public class TransaksiKedai extends javax.swing.JFrame {
         
         Object header[]={"KODE HP","MERK HP","TIPE","HARGA","JUMLAH","SUBTOTAL"};
         TabModel=new DefaultTableModel(null, header);
-//        ambildatacoba();
-//        tampil();
-//        tabeltransaksi.setModel(t);
+
         
 
     }
@@ -153,7 +151,7 @@ public class TransaksiKedai extends javax.swing.JFrame {
         int jumlahbeli=Integer.parseInt(jumlah.getText());
         int stok=getStokByKodeHp(kodeHp.getText());
         
-        return total=jumlahbeli-stok;
+        return total=stok-jumlahbeli;
         
     }
     
@@ -514,6 +512,12 @@ public class TransaksiKedai extends javax.swing.JFrame {
             }
         });
 
+        kembalian.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                kembalianActionPerformed(evt);
+            }
+        });
+
         proses.setText("PROSES");
         proses.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -593,7 +597,7 @@ public class TransaksiKedai extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(35, 35, 35)
+                .addGap(14, 14, 14)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -644,28 +648,6 @@ public class TransaksiKedai extends javax.swing.JFrame {
     private void bttransaksiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttransaksiActionPerformed
         // TODO add your handling code here:
 
-//        int hargaa=Integer.parseInt(harga.getText());
-//        int jml=Integer.parseInt(jumlah.getText());
-//        int stok=Integer.parseInt(jumlah.getText());
-//        int tot=Integer.parseInt(subtotal.getText());
-//
-//        if(jml>stok){
-//            JOptionPane.showMessageDialog(null, "Stok barang tidak mencukupi");
-//        }else{
-//
-//            int subtot=hargaa*jml;
-//            subtotal.setText(Integer.toString(subtot));
-//
-//            int hasilstok=stok-jml;
-//            jumlah.setText(Integer.toString(hasilstok));
-//
-//            int totbay=tot+(hargaa*jml);
-//            total.setText(Integer.toString(totbay));
-//
-//        }
-
-            
-
             int hargaa=Integer.parseInt(harga.getText());
             int jml=Integer.parseInt(jumlah.getText());
             int tot=Integer.parseInt(subtotal.getText());
@@ -675,8 +657,6 @@ public class TransaksiKedai extends javax.swing.JFrame {
             total.setText(String.valueOf(subtot));
 
             ambildata();
-            perbaruistok();
-            
          
 
     }//GEN-LAST:event_bttransaksiActionPerformed
@@ -707,14 +687,15 @@ public class TransaksiKedai extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Lengkapi inputan penjualan barang");
         } else{
             proses();
-            int pesan=JOptionPane.showConfirmDialog(null, "Print Out Nota?","Print",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
+            perbaruistok();
+//            int pesan=JOptionPane.showConfirmDialog(null, "Print Out Nota?","Print",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
 
-            if(pesan==JOptionPane.YES_OPTION){
-                //nota();
-            }else {
-                JOptionPane.showMessageDialog(null, "Simpan Transaksi Berhasil");
+//            if(pesan==JOptionPane.YES_OPTION){
+//                //nota();
+//            }else {
+//                JOptionPane.showMessageDialog(null, "Simpan Transaksi Berhasil");
             }    
-        } 
+//        } 
     }//GEN-LAST:event_prosesActionPerformed
 
     private void jumlahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jumlahActionPerformed
@@ -752,6 +733,10 @@ public class TransaksiKedai extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_tglTransaksiActionPerformed
 
+    private void kembalianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kembalianActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_kembalianActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -788,48 +773,7 @@ public class TransaksiKedai extends javax.swing.JFrame {
     }
     
     private DefaultTableModel t= new DefaultTableModel();
-//    private ArrayList <Coba> transaksicoba;
-//    
-//    private void loadtransaksi(){
-//        t.addColumn("kode hp");
-//        t.addColumn("merk");
-//        t.addColumn("tipe");
-//        t.addColumn("harga");
-//        t.addColumn("jumlah");
-//        t.addColumn("subtotal");
-//    }
-//    private void ambildatacoba(){
-//        if(con!=null){
-//            transaksicoba=new ArrayList<>();
-//            String kueri="SELECT * FROM coba";
-//            try{
-//                PreparedStatement ps=con.prepareStatement(kueri);
-//                ResultSet rs=ps.executeQuery();
-//                while(rs.next()){
-//                    int id=rs.getInt("id");
-//                    String merk=rs.getString("merk");
-//                    String tipe =rs.getString("tipe");
-//                    String harga =rs.getString("harga");
-//                    String jumlah =rs.getString("jumlah");
-//                    String subtotal =rs.getString("subtotal");
-//                    coba =new Coba(id, merk, tipe,  harga,  jumlah, subtotal);
-//                    transaksicoba.add(coba);
-//                    
-//                }
-//                rs.close();
-//                ps.close();
-//            }catch(SQLException ex){
-//                JOptionPane.showMessageDialog(null, "SIMPAN TRANSAKSI PENJUALAN GAGAL");
-//            }
-//        }
-//    }
-//    private void tampil(){
-//        t.setRowCount(0);
-//        for(Coba c:transaksicoba){
-//            t.addRow(new Object[]{c.getMerk(),c.getTipe(),c.getHarga(),c.getJumlah(),c.getSubtotal()});
-//        }
-//    }
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField bayar;

@@ -8,8 +8,6 @@ package test;
 import java.awt.Dimension;
 import java.awt.HeadlessException;
 import java.awt.Toolkit;
-//import java.beans.Statement;
-//import java.sql.Connection;
 import com.mysql.jdbc.Statement;
 import com.mysql.jdbc.Connection;
 import java.sql.DriverManager;
@@ -51,7 +49,6 @@ public class TambahData extends javax.swing.JFrame {
         tahun.setText("");
         harga.setText("");
         tgl_data.setText("");
-        batasgaransi.setText("");
     } 
 
     java.util.Date tglsekarang = new java.util.Date();
@@ -69,11 +66,7 @@ public class TambahData extends javax.swing.JFrame {
         koneksi();
         tabel();
         kosongkan();
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        Dimension frameSize = getSize();
-        setLocation(
-        (screenSize.width - frameSize.width) / 2,
-        (screenSize.height - frameSize.height) / 2);
+        setLocationRelativeTo(null);
     }
     
     private void tabel(){
@@ -85,7 +78,6 @@ public class TambahData extends javax.swing.JFrame {
         t.addColumn("Tahun"); 
         t.addColumn("Harga");
         t.addColumn("Tanggal");
-        t.addColumn("Batas Garansi");
         tabel.setModel(t); 
         try { 
             res=stat.executeQuery("select * from handphone"); 
@@ -97,7 +89,6 @@ public class TambahData extends javax.swing.JFrame {
                     res.getString("tahun"), 
                     res.getString("harga"),
                     res.getString("tgl_data"),
-                    res.getString("batasgaransi")
                     }); 
                 }
         }catch (Exception e) { 
@@ -134,8 +125,6 @@ public class TambahData extends javax.swing.JFrame {
         tambah_hp = new javax.swing.JButton();
         clear_hp = new javax.swing.JButton();
         kembali = new javax.swing.JButton();
-        jLabel5 = new javax.swing.JLabel();
-        batasgaransi = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         kode_hp = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
@@ -213,14 +202,6 @@ public class TambahData extends javax.swing.JFrame {
             }
         });
 
-        jLabel5.setText("Batas Garansi");
-
-        batasgaransi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                batasgaransiActionPerformed(evt);
-            }
-        });
-
         jLabel3.setText("Kode Handphone");
 
         kode_hp.addActionListener(new java.awt.event.ActionListener() {
@@ -250,33 +231,29 @@ public class TambahData extends javax.swing.JFrame {
                                     .addComponent(Jumlah)
                                     .addComponent(jLabel6)
                                     .addComponent(jLabel7)
-                                    .addComponent(jLabel9)
-                                    .addComponent(jLabel5))
+                                    .addComponent(jLabel9))
                                 .addGap(52, 52, 52)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addComponent(tgl_data, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addComponent(harga, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(tahun, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jumlah, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(merk_hp)
-                                            .addComponent(tipe)
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addComponent(tambah_hp, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(clear_hp, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(kembali, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(batasgaransi, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(tgl_data, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(harga, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(tahun, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jumlah, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(merk_hp)
+                                    .addComponent(tipe)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(tambah_hp, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(clear_hp, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(kembali, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addGap(51, 51, 51)
                                 .addComponent(kode_hp, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 435, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -317,11 +294,7 @@ public class TambahData extends javax.swing.JFrame {
                     .addComponent(jLabel9)
                     .addComponent(tgl_data, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(batasgaransi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tambah_hp)
                     .addComponent(clear_hp)
@@ -414,8 +387,7 @@ public class TambahData extends javax.swing.JFrame {
                 + "'" + jumlah.getText()+"',"
                 + "'" + tahun.getText()+ "',"
                 + "'" + harga.getText()+ "',"
-                + "'" + tgl_data.getText()+ "',"                    
-                + "'" + batasgaransi.getText()+ "')");
+                + "'" + tgl_data.getText()+  "')");
             kosongkan();
             JOptionPane.showMessageDialog(null, "Berhasil Menyimpan Data");
         } catch (SQLException | HeadlessException e) {
@@ -440,7 +412,6 @@ public class TambahData extends javax.swing.JFrame {
         }
         String tglg = smpdtfmt.format(cal3.getTime());
         tgl_data.setText(tgl.getText());
-        batasgaransi.setText(tglg);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void tipeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipeActionPerformed
@@ -450,14 +421,6 @@ public class TambahData extends javax.swing.JFrame {
     private void merk_hpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_merk_hpActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_merk_hpActionPerformed
-
-    private void batasgaransiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_batasgaransiActionPerformed
-        // TODO add your handling code here:
-        
-        
-
-
-    }//GEN-LAST:event_batasgaransiActionPerformed
 
     private void tgl_dataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tgl_dataActionPerformed
         // TODO add your handling code here:
@@ -505,7 +468,6 @@ public class TambahData extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Jumlah;
-    private javax.swing.JTextField batasgaransi;
     private javax.swing.JButton clear_hp;
     private javax.swing.JTextField harga;
     private javax.swing.JButton jButton1;
@@ -514,7 +476,6 @@ public class TambahData extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;

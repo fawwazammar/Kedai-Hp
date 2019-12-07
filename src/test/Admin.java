@@ -27,11 +27,11 @@ public class Admin extends javax.swing.JFrame {
      * Creates new form Admin
      */
    
-    private Connection conn;
+//    private Connection conn;
     private ResultSet rs;
     private Statement stat;
     
-//    String zzz;
+    String zzz;
 
 //    public Admin(String zzz) {
 //        this.zzz = zzz;
@@ -64,7 +64,7 @@ public class Admin extends javax.swing.JFrame {
            rs   = stat.executeQuery(sql);
 
            //penelusuran baris pada tabel pegawai dari database
-           while(rs.next ()){
+           while(rs.next()){
                 Object[ ] obj = new Object[4];
                 obj[0] = no;
                 obj[1] = rs.getString("username");
@@ -77,34 +77,6 @@ public class Admin extends javax.swing.JFrame {
         }catch(SQLException err){
             JOptionPane.showMessageDialog(null, err.getMessage() );
         }
-        
-
-//        String query = "SELECT * FROM pegawai WHERE status = 'pegawai'";
-        
-//        try {
-//            PreparedStatement ps = this.conn.prepareStatement(query);
-//            ResultSet rs = ps.executeQuery(); 
-//            
-//            try {
-//                while (rs.next()) {
-//                    Object[ ] obj = new Object[3];
-//                    obj[1] = rs.getString("username");
-//                    obj[2] = rs.getString("password");
-//                    obj[3] = rs.getString("status");
-//
-//                    t.addRow(obj);
-////                    t.addRow(new Object[]{ 
-////                        rs.getString("username"),
-////                        rs.getString("password"), 
-////                        rs.getString("status")
-////                    }); 
-//                }
-//            } catch (SQLException ex) {
-//                Logger.getLogger(Admin.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-//        }catch (Exception e) { 
-//            JOptionPane.showMessageDialog(rootPane, e); 
-//        } 
     }
 
     /**
@@ -437,6 +409,7 @@ public class Admin extends javax.swing.JFrame {
 
             if(status.equals("Aktif")){
                 String sql = "UPDATE pegawai SET status = 'Tidak Aktif' where username = '"+tfUsernameStatus.getText()+"'";
+                
 //                int opsi = JOptionPane.showConfirmDialog(null, "Apakah yakin ingin menonaktifkan?");
 //                switch(opsi){
 //                    case JOptionPane.YES_OPTION:

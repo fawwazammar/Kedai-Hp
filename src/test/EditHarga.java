@@ -287,11 +287,6 @@ public class EditHarga extends javax.swing.JFrame {
         // TODO add your handling code here:
         try {
             stat.executeUpdate("update handphone set "
-                //                + "kode_hp='"+kode_hp.getText()+"',"
-                //                + "nama_hp='"+nama_hp.getText()+"',"
-                //                + "merk='"+merk.getText()+"',"
-                //                + "warna='"+warna.getText()+"',"
-                //                + "tahun='"+tahun.getText()+"',"
                 + "harga='"+harga.getText()+"'"
 
                 + " where " + "kode_hp='"+kode_hp.getText()+"'" );

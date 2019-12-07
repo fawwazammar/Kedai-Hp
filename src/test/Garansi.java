@@ -82,7 +82,7 @@ public class Garansi extends javax.swing.JFrame {
                     res.getString("tipe"), 
                     res.getString("jumlah"), 
                     res.getString("harga"),
-                    res.getString("tglTransaksi")
+                    res.getString("tanggal")
                     }); 
                 }
         }catch (Exception e) { 
@@ -356,7 +356,7 @@ public class Garansi extends javax.swing.JFrame {
                 noTransaksi.setText(res.getString("notransaksi"));
                 merk_hp.setText(res.getString("merkHp"));
                 tipe.setText(res.getString("tipe"));
-                tglTransaksi.setText(res.getString("tglTransaksi"));
+                tglTransaksi.setText(res.getString("tanggal"));
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(rootPane, e);
